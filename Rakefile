@@ -27,16 +27,16 @@ task :gyazo_upload do
     path = '/upload.cgi'
 
     boundary = '----BOUNDARYBOUNDARY----'
-    data = <<-DATA
---#{boundary}\r
-content-disposition: form-data; name="id"\r
-\r
-#{gyazo_id}\r
---#{boundary}\r
-content-disposition: form-data; name="imagedata"; filename="gyazo.com"\r
-\r
-#{image_data}\r
---#{boundary}--\r
+    data = <<~DATA
+      --#{boundary}\r
+      content-disposition: form-data; name="id"\r
+      \r
+      #{gyazo_id}\r
+      --#{boundary}\r
+      content-disposition: form-data; name="imagedata"; filename="gyazo.com"\r
+      \r
+      #{image_data}\r
+      --#{boundary}--\r
     DATA
     headers = {
       'Content-Length' => data.length.to_s,
