@@ -4,14 +4,18 @@ Lambda function to provide a Gyazo server clone with S3 backend using Amazon API
 
 ## Build
 
-```
+```bash
 $ gradle jar
 ```
 
 ## Test
 
-```
+```bash
+# Request to real Gyazo
 $ UPLOAD=~/Pictures/a.png rake
+
+# Request to API gateway
+$ UPLOAD=~/Pictures/a.png API_ID= rake
 ```
 
 ## Specification
