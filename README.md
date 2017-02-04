@@ -75,6 +75,8 @@ No imagedata
 ```
 
 ## API Gateway Configuration
+Specify `com.github.k0kubun.lambda.gyazo.GyazoHandler::post` in Lambda.
+
 ### Method Request
 #### Model Schema (multipart/form-data)
 

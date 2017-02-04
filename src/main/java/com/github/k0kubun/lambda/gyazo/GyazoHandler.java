@@ -4,7 +4,8 @@ import com.amazonaws.services.lambda.runtime.Context;
 
 public class GyazoHandler {
     public String post(final Request request, final Context context) {
-        return "Content Type: " + request.getContentType() +
+        ContentType contentType = new ContentType(request.getContentType());
+        return "Boundary: " + contentType.getParameters().get("boundary") +
             "\nBase64 body: " + request.getBody();
     }
 }
