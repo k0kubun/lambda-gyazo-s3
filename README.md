@@ -74,6 +74,42 @@ https://gyazo.com/0123456789abcdef0123456789abcdef
 No imagedata
 ```
 
+## API Gateway Configuration
+### Method Request
+#### Model Schema (multipart/form-data)
+
+```json
+{}
+```
+
+### Integration Request
+#### Body Mapping Templates (multipart/form-data)
+
+```json
+#set($inputParams = $util.base64Encode($input.path('$')))
+{
+  "body" : "$inputParams"
+}
+```
+
+### Integration Response
+#### Body Mapping Templates (text/html)
+
+```json
+$input.path('$')
+```
+
+### Method Response
+#### Model Schema (text/html)
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title" : "Empty Schema",
+  "type" : "object"
+}
+```
+
 ## License
 
 MIT License
