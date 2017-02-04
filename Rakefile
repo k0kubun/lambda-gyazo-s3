@@ -13,31 +13,7 @@ task :gyazo_upload do
     end
 
     # @return [Net::HTTPResponse]
-    def upload(gyazo_id:, image_data:, use_json:)
-      if use_json
-        upload_with_json(gyazo_id, image_data)
-      else
-        upload_with_multipart(gyazo_id, image_data)
-      end
-    end
-
-    private
-
-    def upload_with_json(gyazo_id, image_data)
-      # Ideally we shouldn't use JSON to post binary. Using JSON and sending Base64-encoded
-      # binary in it because Lambda's Input mapping is too difficult to configure :(
-      data = {
-        id: gyazo_id,
-        imagedata: Base64.strict_encode64(image_data),
-      }.to_json
-      headers = {
-        'Content-Type' => 'application/json',
-        'User-Agent' => 'Gyazo/2.0',
-      }
-      post(@upload_path, data, headers)
-    end
-
-    def upload_with_multipart(gyazo_id, image_data)
+    def upload(gyazo_id:, image_data:)
       boundary = '----BOUNDARYBOUNDARY----'
       data = <<~DATA
         --#{boundary}\r
@@ -57,6 +33,8 @@ task :gyazo_upload do
       }
       post(@upload_path, data, headers)
     end
+
+    private
 
     def post(path, data, headers = {})
       Net::HTTP.start(@host, @port, use_ssl: @port == 443) do |http|
@@ -96,11 +74,8 @@ task :gyazo_upload do
     )
   end
 
-  resp = GyazoClient.new(params).upload(
-    gyazo_id:   'dummy-id',
-    image_data: File.read(ENV.fetch('UPLOAD')),
-    use_json:   ENV.key?('API_ID'),
-  )
+  image = File.read(ENV.fetch('UPLOAD'))
+  resp = GyazoClient.new(params).upload(gyazo_id: 'dummy-id', image_data: image)
   puts ResponseFormatter.format(resp)
 end
 task default: :gyazo_upload
