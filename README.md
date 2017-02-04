@@ -8,6 +8,12 @@ Lambda function to provide a Gyazo server clone with S3 backend using Amazon API
 $ gradle jar
 ```
 
+## Test
+
+```
+$ UPLOAD=~/Pictures/a.png rake
+```
+
 ## Specification
 Implemented to work as [Gyazo server](https://github.com/gyazo/Gyazo/blob/2d72acbdca855d96f1ab01d84497361512428a62/Server/upload.cgi)
 for [Gyazo client](https://github.com/gyazo/Gyazo/blob/2d72acbdca855d96f1ab01d84497361512428a62/Gyazo/script).
