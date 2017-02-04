@@ -1,6 +1,7 @@
 package com.github.k0kubun.lambda.gyazo;
 
 import com.amazonaws.services.lambda.runtime.Context;
+import java.util.Map;
 
 public class GyazoHandler {
     public String post(final Request request, final Context context) {
@@ -9,9 +10,8 @@ public class GyazoHandler {
             return "bad request";
         }
 
-        return "Boundary:\n" +
-            boundary +
-            "\nBase64 body:\n" + request.getBody();
+        Multipart multipart = new Multipart(request.getBody(), boundary);
+        return buildResponse(multipart);
     }
 
     private String getBoundary(final Request request) {
@@ -20,5 +20,17 @@ public class GyazoHandler {
         }
         ContentType contentType = new ContentType(request.getContentType());
         return contentType.getParameters().get("boundary");
+    }
+
+    private String buildResponse(Multipart multipart) {
+        String ret = "";
+        for (Map.Entry<String, ContentDisposition> data : multipart.getFormData().entrySet()) {
+            ret += "\nKey:";
+            ret += data.getKey();
+            ret += "\nValue:";
+            ret += Integer.valueOf(data.getKey().length()).toString();
+            ret += "\n";
+        }
+        return ret;
     }
 }
