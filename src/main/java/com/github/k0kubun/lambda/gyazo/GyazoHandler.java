@@ -4,6 +4,7 @@ import com.amazonaws.services.lambda.runtime.Context;
 
 public class GyazoHandler {
     public String post(final Request request, final Context context) {
-        return "Base64 body: " + request.getBody();
+        return "Content Type: " + request.getContentType() +
+            "\nBase64 body: " + request.getBody();
     }
 }

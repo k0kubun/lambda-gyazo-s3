@@ -29,7 +29,7 @@ for [Gyazo client](https://github.com/gyazo/Gyazo/blob/2d72acbdca855d96f1ab01d84
 > Host: upload.gyazo.com
 > Accept: */*
 > Content-Length: 335996
-> Content-type: multipart/form-data; boundary=----BOUNDARYBOUNDARY----
+> Content-Type: multipart/form-data; boundary=----BOUNDARYBOUNDARY----
 > User-Agent: Gyazo/2.0
 >
 ------BOUNDARYBOUNDARY----
@@ -87,8 +87,10 @@ No imagedata
 
 ```json
 #set($inputParams = $util.base64Encode($input.path('$')))
+#set($contentType = $input.params().header.get("Content-Type"))
 {
-  "body" : "$inputParams"
+  "body": "$inputParams",
+  "contentType": "$contentType"
 }
 ```
 
@@ -105,8 +107,8 @@ $input.path('$')
 ```json
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title" : "Empty Schema",
-  "type" : "object"
+  "title": "Empty Schema",
+  "type": "object"
 }
 ```
 
