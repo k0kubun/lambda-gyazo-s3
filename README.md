@@ -1,6 +1,8 @@
 # lambda-gyazo-s3
 
 AWS Lambda function to provide a Gyazo server clone with S3 backend using Amazon API Gateway.
+While you can modify a client instead of adapting a server and use S3 directly for this purpose,
+this is implemented for my practice.
 
 ## Build
 
