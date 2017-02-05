@@ -20,7 +20,7 @@ class ContentDisposition {
         return body;
     }
 
-    private static Map<String, String> parseParameters(String dataHeader) {
+    private Map<String, String> parseParameters(String dataHeader) {
         String[] delimited = dataHeader.substring(0, dataHeader.length()-1).split("; ", 0);
         String[] rawParameters = Arrays.copyOfRange(delimited, 1, delimited.length);
 
@@ -34,7 +34,7 @@ class ContentDisposition {
         return parameters;
     }
 
-    private static String parseType(String dataHeader) {
+    private String parseType(String dataHeader) {
         String firstFragment = dataHeader.split("; ", 2)[0];
         return firstFragment.split(": ", 2)[1];
     }

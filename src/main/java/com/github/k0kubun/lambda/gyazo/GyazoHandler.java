@@ -11,7 +11,13 @@ public class GyazoHandler {
         }
 
         Multipart multipart = new Multipart(request.getBody(), boundary);
-        return buildResponse(multipart);
+        String imageData = getImageData(multipart);
+        if (imageData == null) {
+            throw new BadRequestException("No imagedata given!");
+        }
+
+        ImageStorage storage = new ImageStorage();
+        return storage.upload(imageData);
     }
 
     private String getBoundary(final Request request) {
@@ -22,15 +28,11 @@ public class GyazoHandler {
         return contentType.getParameters().get("boundary");
     }
 
-    private String buildResponse(Multipart multipart) {
-        String ret = "";
-        for (Map.Entry<String, ContentDisposition> data : multipart.getContents().entrySet()) {
-            ret += "\nKey:";
-            ret += data.getKey();
-            ret += "\nValue:";
-            ret += data.getValue().getBody().length();
-            ret += "\n";
+    private String getImageData(final Multipart multipart) {
+        if (!multipart.contents.containsKey("imagedata")) {
+            return null;
         }
-        return ret;
+        ContentDisposition imageContent = multipart.contents.get("imagedata");
+        return imageContent.getBody();
     }
 }

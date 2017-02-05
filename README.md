@@ -107,7 +107,7 @@ $input.path('$')
 
 #### Lambda Error Regex (400)
 
-`No boundary given!`
+`No .* given!`
 
 ### Method Response
 #### Model Schema (200, text/html)
