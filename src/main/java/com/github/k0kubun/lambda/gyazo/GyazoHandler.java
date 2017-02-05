@@ -24,7 +24,7 @@ public class GyazoHandler {
 
     private String buildResponse(Multipart multipart) {
         String ret = "";
-        for (Map.Entry<String, ContentDisposition> data : multipart.getFormData().entrySet()) {
+        for (Map.Entry<String, ContentDisposition> data : multipart.getContents().entrySet()) {
             ret += "\nKey:";
             ret += data.getKey();
             ret += "\nValue:";
