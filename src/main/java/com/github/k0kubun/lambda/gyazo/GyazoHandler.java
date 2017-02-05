@@ -4,10 +4,10 @@ import com.amazonaws.services.lambda.runtime.Context;
 import java.util.Map;
 
 public class GyazoHandler {
-    public String post(final Request request, final Context context) {
+    public String post(final Request request, final Context context) throws BadRequestException {
         String boundary = getBoundary(request);
         if (boundary == null) {
-            return "bad request";
+            throw new BadRequestException("No boundary given!");
         }
 
         Multipart multipart = new Multipart(request.getBody(), boundary);

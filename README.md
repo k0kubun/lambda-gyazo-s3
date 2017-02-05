@@ -97,14 +97,18 @@ Specify `com.github.k0kubun.lambda.gyazo.GyazoHandler::post` in Lambda.
 ```
 
 ### Integration Response
-#### Body Mapping Templates (text/html)
+#### Body Mapping Templates (200, text/html)
 
 ```json
 $input.path('$')
 ```
 
+#### Lambda Error Regex (400)
+
+`No boundary given!`
+
 ### Method Response
-#### Model Schema (text/html)
+#### Model Schema (200, text/html)
 
 ```json
 {
@@ -113,6 +117,10 @@ $input.path('$')
   "type": "object"
 }
 ```
+
+#### Model Schema (400)
+
+No models
 
 ## License
 
