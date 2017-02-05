@@ -1,5 +1,6 @@
 package com.github.k0kubun.lambda.gyazo;
 
+import java.util.Random;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
@@ -13,12 +14,22 @@ class ImageStorage {
     }
 
     public String upload(String image) {
-        uploadWithS3("lambda-gyazo", "hello.png", image);
-        return "https://s3-ap-northeast-1.amazonaws.com/lambda-gyazo/hello.png";
+        String filename = getRandomHexString(32);
+        uploadWithS3("lambda-gyazo", filename, image);
+        return "https://s3-ap-northeast-1.amazonaws.com/lambda-gyazo/" + filename;
     }
 
     private void uploadWithS3(String bucket, String key, String image) {
         s3client.putObject(bucket, key, image);
         s3client.setObjectAcl(bucket, key, CannedAccessControlList.PublicRead);
+    }
+
+    private String getRandomHexString(int length) {
+        Random r = new Random();
+        StringBuffer sb = new StringBuffer();
+        while (sb.length() < length) {
+            sb.append(Integer.toHexString(r.nextInt()));
+        }
+        return sb.toString().substring(0, length);
     }
 }
