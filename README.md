@@ -7,7 +7,7 @@ this is implemented for my practice.
 ## Build
 
 ```bash
-$ gradle jar
+$ gradle buildZip
 ```
 
 ## Test
