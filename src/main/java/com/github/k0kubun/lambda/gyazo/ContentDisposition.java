@@ -9,7 +9,7 @@ class ContentDisposition {
 
     public static ContentDisposition parse(String rawData) {
         // TODO: Parse parameters
-        Map<String, String> parameters = new HashMap<String, String>();
+        Map<String, String> parameters = new HashMap<>();
         return new ContentDisposition("hello", parameters);
     }
 

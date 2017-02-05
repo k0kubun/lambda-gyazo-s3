@@ -18,7 +18,7 @@ class Multipart {
         String[] rawDatas = rawBody.
             replaceFirst("--" + boundary + "--", "").split("--" + boundary, 0);
 
-        HashMap<String, ContentDisposition> ret = new HashMap<String, ContentDisposition>();
+        HashMap<String, ContentDisposition> ret = new HashMap<>();
         for (String rawData : rawDatas) {
             if (rawData.length() > 0) {
                 ContentDisposition content = ContentDisposition.parse(rawData);

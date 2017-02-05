@@ -27,7 +27,7 @@ class ContentType {
     private HashMap<String, String> parseParameters(String contentType) {
         String[] delimited = contentType.split("; ", 2);
 
-        HashMap<String, String> ret = new HashMap<String, String>();
+        HashMap<String, String> ret = new HashMap<>();
         if (delimited.length == 2) {
             String[] keyAndValue = delimited[1].split("=", 2);
             ret.put(keyAndValue[0], keyAndValue[1]);
