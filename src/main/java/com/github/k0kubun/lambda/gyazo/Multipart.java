@@ -21,8 +21,11 @@ class Multipart {
         HashMap<String, ContentDisposition> ret = new HashMap<>();
         for (String rawData : rawDatas) {
             if (rawData.length() > 0) {
-                ContentDisposition content = ContentDisposition.parse(rawData);
-                ret.put(rawData, content);
+                ContentDisposition content = new ContentDisposition(rawData);
+                String name = content.parameters.get("name");
+                if (name != null) {
+                    ret.put(name, content);
+                }
             }
         }
         return ret;

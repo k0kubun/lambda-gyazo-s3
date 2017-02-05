@@ -28,7 +28,7 @@ public class GyazoHandler {
             ret += "\nKey:";
             ret += data.getKey();
             ret += "\nValue:";
-            ret += Integer.valueOf(data.getKey().length()).toString();
+            ret += data.getValue().getBody().length();
             ret += "\n";
         }
         return ret;
